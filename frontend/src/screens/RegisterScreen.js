@@ -2,6 +2,11 @@ import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, TextInput, useTheme } from "react-native-paper";
 
+const poolData = {
+  UserPoolId: "us-east-2_3i4xHxMNJ",
+  ClientId: "71lhjh4qlf0rped5pnoeo08bkl",
+};
+
 const RegisterScreen = () => {
   const theme = useTheme();
   //   const styles = useMemo(
@@ -18,7 +23,9 @@ const RegisterScreen = () => {
   //   );
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  function onRegister() {}
+  function onRegister() {
+    const attributeList = [new CongnitoUserAttribute()];
+  }
 
   return (
     <View>
