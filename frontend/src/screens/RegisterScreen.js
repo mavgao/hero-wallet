@@ -1,3 +1,7 @@
+import {
+  CognitoUserAttribute,
+  CognitoUserPool,
+} from "amazon-cognito-identity-js";
 import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { Button, Text, TextInput, useTheme } from "react-native-paper";
@@ -6,6 +10,9 @@ const poolData = {
   UserPoolId: "us-east-2_3i4xHxMNJ",
   ClientId: "71lhjh4qlf0rped5pnoeo08bkl",
 };
+
+const userPool = new CognitoUserPool(poolData);
+console.log(userPool);
 
 const RegisterScreen = ({ navigation }) => {
   const theme = useTheme();
@@ -22,14 +29,29 @@ const RegisterScreen = ({ navigation }) => {
   //     [theme]
   //   );
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("Qwertyuiop12345!");
+  const [username, setUsername] = useState("+17809051234");
   function onRegisterWithEmail() {
-    const attributeList = [new CongnitoUserAttribute()];
-    navigation.navigate("Verify");
+    const attributeList = [
+      new CognitoUserAttribute({ Name: "email", Value: email }),
+      new CognitoUserAttribute({
+        Name: "phone_number",
+        Value: phone,
+      }),
+    ];
+    userPool.signUp(username, password, attributeList, null, (err, result) => {
+      if (err) {
+        console.error(err);
+        return;
+      }
+      const cognitoUser = result.user;
+      console.log("User registration successful:", cognitoUser);
+    });
+
+    navigation.navigate("Verification");
   }
-  function onRegisterWithPhone() {
-    const attributeList = [new CongnitoUserAttribute()];
-  }
+  function onRegisterWithPhone() {}
 
   return (
     <View style={styles.container}>
@@ -48,6 +70,7 @@ const RegisterScreen = ({ navigation }) => {
           placeholder="Email Address"
           keyboardType="email-address"
           autoCapitalize="none"
+          onChangeText={(text) => setEmail(text)}
         />
       </View>
       <View style={{ flex: 1 }}>
@@ -65,6 +88,7 @@ const RegisterScreen = ({ navigation }) => {
           placeholder="Phone Number"
           keyboardType="phone-pad"
           autoCapitalize="none"
+          onChangeText={(text) => setPhone(text)}
         />
       </View>
       <View

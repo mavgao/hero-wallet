@@ -5,6 +5,7 @@ import { StyleSheet } from "react-native";
 import LoginScreen from "./screens/LoginScreen";
 import ForgotPasswordScreen from "./screens/ForgotPwdScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
+import VerifyScreen from "./screens/VerifyScreen";
 
 const Stack = createNativeStackNavigator();
 // const styles = StyleSheet.create({
@@ -29,6 +30,11 @@ export default function Main() {
           name="Register"
           component={RegisterScreen}
           options={{ title: "Register" }}
+        />
+        <Stack.Screen
+          name="Verification"
+          component={VerifyScreen}
+          options={{ title: "Verification" }}
         />
         <Stack.Screen
           name="Login"
