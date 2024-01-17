@@ -6,6 +6,7 @@ import LoginScreen from "./screens/LoginScreen";
 import ForgotPasswordScreen from "./screens/ForgotPwdScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import VerifyScreen from "./screens/VerifyScreen";
+import EmailAndPhoneRegisterScreen from "./screens/EmailAndPhoneRegisterScreen";
 
 const Stack = createNativeStackNavigator();
 // const styles = StyleSheet.create({
@@ -30,6 +31,11 @@ export default function Main() {
           name="Register"
           component={RegisterScreen}
           options={{ title: "Register" }}
+        />
+        <Stack.Screen
+          name="RegisterEmailAndPhone"
+          component={EmailAndPhoneRegisterScreen}
+          options={{ title: "Register Email and Phone" }}
         />
         <Stack.Screen
           name="Verification"
