@@ -22,7 +22,16 @@ const RegisterScreen = ({ navigation }) => {
       </Text>
       <TextInput
         style={styles.input}
-        placeholder="password"
+        placeholder="New password"
+        onChangeText={(text) => setPassword(text)}
+        value={password}
+      />
+      <Text style={{ fontSize: 16, fontWeight: "600", marginBottom: 10 }}>
+        Verify your password
+      </Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Verify your password"
         onChangeText={(text) => setPassword(text)}
         value={password}
       />
